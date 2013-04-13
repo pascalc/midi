@@ -1,0 +1,78 @@
+<html>
+	<head>
+		<style>
+			#container img {
+				position: absolute;
+			}
+
+			#container #canvas {
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>dotter</h2>
+			
+		<div id="container">
+			<img src="images/cat-lines.jpg" alt="image">
+			<canvas id="canvas" width="600" height="600"></canvas>
+		</div>
+
+		<script>
+			var c=document.getElementById("canvas");
+			var ctx=c.getContext("2d");
+			ctx.fillStyle="#FF0000";
+
+			var dotRadius = 5,
+				dots = [];
+
+			function addDot(x, y) {
+				ctx.beginPath();
+				ctx.arc(x, y, dotRadius, 0, 2*Math.PI);
+				ctx.fill();
+			}
+
+			function removeLastDot(x, y) {
+				var dot        = dots[dots.length - 1],
+				    x          = dot[0] - dotRadius,
+				    y          = dot[1] - dotRadius,
+				    rectLength = dotRadius * 2
+
+				ctx.clearRect(x, y, rectLength, rectLength);
+				dots.splice(dots.length - 1, 1);
+				console.log("Remove last dot");
+			}
+
+			function drawLines() {
+				for (var i = 0; i < dots.length; i++) {
+					startPoint = dots[i];
+					endPoint   = dots[(i+1) % dots.length];
+					ctx.moveTo(startPoint[0], startPoint[1]);
+					ctx.lineTo(endPoint[0]  , endPoint[1]);
+					ctx.stroke();
+				}
+			}
+
+			c.addEventListener('click', function(e) {
+				var x = e.offsetX,
+					y = e.offsetY;
+				console.log('click: ' + x + ', ' + y);
+				addDot(x, y);
+				dots.push([x, y]);
+			}, false);
+
+			window.onkeypress = function(e) {
+				var charCode = e.keyCode;
+				if (charCode == 114) {
+					removeLastDot();
+				}
+				else if (charCode == 13) {
+					console.log('Draw')
+					drawLines();
+				}
+			};
+		</script>
+	</body>
+</html>
+
+
