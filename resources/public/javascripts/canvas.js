@@ -16,12 +16,12 @@ function addDot(x, y, dotColor, dotRadius) {
 	ctx.fillStyle = color.defaultColor;
 }
 
-function drawDots() {
+function drawDots(current) {
 	for (var i = 0; i < image.length; i++) {
 		var x         = image[i][0],
 		    y         = image[i][1],
 		    color     = dotColorAt(i),
-		    dotRadius = i == (currentDot + 1) % image.length ? bigDotRadius : defaultDotRadius;
+		    dotRadius = (i == current) % image.length ? bigDotRadius : defaultDotRadius;
 		addDot(x, y, color, dotRadius);
 	}
 }
@@ -50,8 +50,8 @@ function drawLines() {
 	}
 }
 
-function draw() {
+function draw(current) {
 	clearCanvas();
-	drawDots();
+	drawDots(current);
 	drawLines();
 }

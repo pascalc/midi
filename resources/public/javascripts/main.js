@@ -12,15 +12,17 @@ function onNoteDown(note) {
 
 	if (noteCode == expectedNoteCode) {
 		console.log('Good!');
-		draw();
+		console.log("Incrementing currentDot");
+		currentDot = (currentDot + 1) % image.length;
+		console.log("currentDot", currentDot);
+		draw(currentDot);
 		if (gameIsFinished()) {
 			alert("Great job!");
 		}
-		currentDot = (currentDot + 1) % image.length;
 	}
 	else {
 		console.log("Wrong character `" + note + "`, next is: " + getNextNote());
 	}
 }
 
-draw();
+draw(0);
