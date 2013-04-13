@@ -1,7 +1,13 @@
 var c=document.getElementById("canvas");
 var ctx=c.getContext("2d");
 var image      = catImage,
-	dotRadius  = 5;
+	dotRadius  = 4;
+
+function addDot(x, y) {
+	ctx.beginPath();
+	ctx.arc(x, y, dotRadius, 0, 2*Math.PI);
+	ctx.fill();
+}
 
 function drawLine(startX, startY, endX, endY) {
 	ctx.moveTo(startX, startY);
