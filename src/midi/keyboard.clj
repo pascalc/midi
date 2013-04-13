@@ -31,6 +31,7 @@
     (json/generate-string
       {:raw   (DatatypeConverter/printHexBinary msg)
        :tone  (Note/getStringForNote note)
+       :note  note
        :type  (event status)})))
 
 (def receiver 

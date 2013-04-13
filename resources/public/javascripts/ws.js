@@ -1,4 +1,4 @@
-var ws = new WebSocket("ws://192.168.2.2:8080");
+var ws = new WebSocket("ws://localhost:8080");
 var lastPackage = null;
 
 ws.onopen = function()
@@ -20,8 +20,10 @@ function send(msg) {
 ws.onmessage = function (evt) 
 { 
 	console.log("Received:", evt.data);
-	lastPackage = new midiSocketProtocol(JSON.parse(evt.data));
+	var parsed = JSON.parse(evt.data);
+	lastPackage = new midiSocketProtocol(parsed);
 	if (lastPackage.type == midiSocketProtocol.types.noteOn) {
+		play(parsed.note);
 		onNoteDown(lastPackage.note);
 	}
 };
