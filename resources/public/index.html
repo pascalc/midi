@@ -1,5 +1,14 @@
 <html>
 	<head>
+	 <script src="./javascripts/MIDI/AudioDetect.js" type="text/javascript"></script>
+	 <script src="./javascripts/MIDI/LoadPlugin.js" type="text/javascript"></script>
+	 <script src="./javascripts/MIDI/Plugin.js" type="text/javascript"></script>
+	 <script src="./javascripts/MIDI/Player.js" type="text/javascript"></script>
+	 <script src="./javascripts/Window/DOMLoader.XMLHttp.js" type="text/javascript"></script>
+	 <script src="./javascripts/Window/DOMLoader.script.js" type="text/javascript"></script>
+	 <!-- extras -->
+ <script src="./javascripts/MIDI/Base64.js" type="text/javascript"></script>
+ <script src="./javascripts/MIDI/base64binary.js" type="text/javascript"></script>
 		<style>
 			#container img {
 				position: absolute;
@@ -18,7 +27,28 @@
 			<canvas id="canvas" width="600" height="600"></canvas>
 		</div>
 
+<<<<<<< HEAD
 		<script src="javascripts/colors.js"></script>
+=======
+		<script type="text/javascript">
+		window.onload = function () {
+			MIDI.loadPlugin({
+				soundfontUrl: "./soundfont/",
+				instrument: "acoustic_grand_piano",
+				callback: function() { console.log("Loaded plugin!") },
+			});
+		};
+
+		function play(note) {
+			var delay = 0; // play one note every quarter second
+			var velocity = 127; // how hard the note hits
+			// play the note
+			MIDI.setVolume(0, 127);
+			MIDI.noteOn(0, note, velocity, delay);
+			MIDI.noteOff(0, note, delay + 0.75);
+		}
+		</script>
+>>>>>>> 250a49713644de74510b4cfe6e243cef05e5823f
 		<script src="javascripts/songs/cat.js"></script>
 		<script src="javascripts/notes.js"></script>
 		<script src="javascripts/canvas.js"></script>

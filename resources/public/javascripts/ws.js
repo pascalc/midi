@@ -22,8 +22,10 @@ function send(msg) {
 ws.onmessage = function (evt) 
 { 
 	console.log("Received:", evt.data);
-	lastPackage = new midiSocketProtocol(JSON.parse(evt.data));
+	var parsed = JSON.parse(evt.data);
+	lastPackage = new midiSocketProtocol(parsed);
 	if (lastPackage.type == midiSocketProtocol.types.noteOn) {
+		play(parsed.note);
 		onNoteDown(lastPackage.note);
 	}
 };

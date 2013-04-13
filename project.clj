@@ -8,5 +8,6 @@
                  [jfugue "4.0.3"]
                  [cheshire "5.1.1"]]
   :source-paths ["src"]               
-  :repl-options {:init-ns midi.core}
-  :main midi.server)
+  :repl-options {:init-ns midi.keyboard}
+  :aot [midi.main]
+  :main midi.main)
