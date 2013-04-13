@@ -3,10 +3,25 @@ var ctx=c.getContext("2d");
 var image      = catImage,
 	dotRadius  = 4;
 
-function addDot(x, y) {
+function addDot(x, y, dotColor) {
 	ctx.beginPath();
 	ctx.arc(x, y, dotRadius, 0, 2*Math.PI);
+	ctx.fillStyle = dotColor;
 	ctx.fill();
+	ctx.fillStyle = color.defaultColor;
+}
+
+function drawDots() {
+	for (var i = 0; i < image.length; i++) {
+		var x     = image[i][0],
+		    y     = image[i][1],
+		    color = dotColorAt(i);
+		addDot(x, y, color)
+	}
+}
+
+function dotColorAt(i) {
+	return noteColors[notes[i]];
 }
 
 function drawLine(startX, startY, endX, endY) {

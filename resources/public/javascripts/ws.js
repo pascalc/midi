@@ -1,4 +1,6 @@
-var ws = new WebSocket("ws://192.168.2.2:8080");
+var serverIp = "192.168.1.136",
+    serverPort = 8080;
+var ws = new WebSocket("ws://" + serverIp + ":" + serverPort);
 var lastPackage = null;
 
 ws.onopen = function()
