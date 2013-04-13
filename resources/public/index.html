@@ -34,24 +34,7 @@
 		</div>
 
 		<script src="javascripts/colors.js"></script>
-		<script type="text/javascript">
-		window.onload = function () {
-			MIDI.loadPlugin({
-				soundfontUrl: "./soundfont/",
-				instrument: "acoustic_grand_piano",
-				callback: function() { console.log("Loaded plugin!") },
-			});
-		};
-
-		function play(note) {
-			var delay = 0; // play one note every quarter second
-			var velocity = 127; // how hard the note hits
-			// play the note
-			MIDI.setVolume(0, 127);
-			MIDI.noteOn(0, note, velocity, delay);
-			MIDI.noteOff(0, note, delay + 0.75);
-		}
-		</script>
+		<script src="javascripts/play.js"></script>
 		<script src="javascripts/songs/cat.js"></script>
 		<script src="javascripts/notes.js"></script>
 		<script src="javascripts/canvas.js"></script>
