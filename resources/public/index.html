@@ -1,31 +1,30 @@
-<!DOCTYPE HTML>
 <html>
-<head>
-<script type="text/javascript">
-// Let us open a web socket
-var ws = new WebSocket("ws://localhost:8080");
-ws.onopen = function()
-{
-  // Web Socket is connected, send data using send()
-  console.log("Socket opened!");
-};
+	<head>
+		<style>
+			#container img {
+				position: absolute;
+			}
 
-ws.onclose = function()
-{ 
-  // websocket is closed.
-  console.log("Socket closed!");
-};
+			#container #canvas {
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>dotter</h2>
+			
+		<div id="container">
+			<img src="images/cat-background.jpg" alt="image">
+			<canvas id="canvas" width="600" height="600"></canvas>
+		</div>
 
-function send(msg) {
-  ws.send(msg);
-}
-
-ws.onmessage = function (evt) 
-{ 
-  console.log("Received:", evt.data);
-};
-</script>
-</head>
-<body>
-</body>
+		<script src="javascripts/songs/cat.js"></script>
+		<script src="javascripts/notes.js"></script>
+		<script src="javascripts/canvas.js"></script>
+		<script src="javascripts/midiSocketProtocol.js"></script>
+		<script src="javascripts/ws.js"></script>
+		<script src="javascripts/main.js"></script>
+	</body>
 </html>
+
+
