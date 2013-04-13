@@ -1,9 +1,11 @@
 (ns midi.core
-  (:require [midi.server :as server])
+  (:require [midi.server :as server]
+            [cheshire.core :as json])
   (:import (javax.sound.midi 
               MidiSystem MidiMessage
               Receiver)
-          [javax.xml.bind DatatypeConverter]))
+          [javax.xml.bind DatatypeConverter]
+          [org.jfugue Note]))
 
 ;; Get a reference to the keyboard
 
@@ -18,14 +20,25 @@
 
 ;; Create a receiver for the keyboard's MidiEvents
 
+(def event
+  {144 "noteOn"
+   128 "noteOff"})
+
+(defn midi->json [data]
+  (let [msg     (.getMessage data)
+        note    (aget msg 1)
+        status  (.getStatus data)]
+    (json/generate-string
+      {:raw   (DatatypeConverter/printHexBinary msg)
+       :tone  (Note/getStringForNote note)
+       :type  (event status)})))
+
 (def receiver 
   (reify Receiver
     (close [this]
       (println "Closing!"))
     (send [this data timestamp]
-      (let [msg (.getMessage data)]
-        (server/broadcast! 
-          (DatatypeConverter/printHexBinary msg))))))
+      (server/broadcast! (midi->json data)))))
           
 (defn reload! []
   (close!)

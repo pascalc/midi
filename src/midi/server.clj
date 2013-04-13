@@ -5,14 +5,14 @@
 
 (defn midi-handler [request]
   (if-not (:websocket? request)
-      {:status 200 :body "Welcome to the MIDI server!"}
-      (with-channel request ch
-        (println ch "connected")
-        (swap! clients assoc ch true)
-        (on-close ch 
-          (fn [status]
-            (swap! clients dissoc ch)
-            (println ch "closed, status" status))))))
+    {:status 200 :body "Welcome to the MIDI server!"}
+    (with-channel request ch
+      (println ch "connected")
+      (swap! clients assoc ch true)
+      (on-close ch 
+        (fn [status]
+          (swap! clients dissoc ch)
+          (println ch "closed, status" status))))))
 
 (defn broadcast! [data]
   (doseq [client (keys @clients)]
