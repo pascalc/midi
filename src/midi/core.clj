@@ -1,13 +1,13 @@
 (ns midi.core
+  (:require [midi.server :as server])
   (:import (javax.sound.midi 
               MidiSystem MidiMessage
               Receiver)
-          [javax.xml.bind DatatypeConverter]
-          [org.jfugue Note]))
+          [javax.xml.bind DatatypeConverter]))
 
 ;; Get a reference to the keyboard
 
-(def device       (MidiSystem/getMidiDevice (aget (MidiSystem/getMidiDeviceInfo) 0)))
+(defonce device   (MidiSystem/getMidiDevice (aget (MidiSystem/getMidiDeviceInfo) 0)))
 (def transmitter  (.getTransmitter device))
 
 (defn open! [] 
@@ -18,26 +18,14 @@
 
 ;; Create a receiver for the keyboard's MidiEvents
 
-(defn hex->str
-  [hex]
-  (->> hex
-    (partition 2)
-    (map (partial apply str))
-    (interpose " ")
-    (apply str)))
-
-(def messages (atom []))
-
 (def receiver 
   (reify Receiver
     (close [this]
       (println "Closing!"))
-    (send [this msg timestamp]
-      (println 
-        (format "[%s]: %s" 
-          timestamp (Note/getStringForNote (aget (.getMessage msg) 1))))
-          ;timestamp (hex->str (DatatypeConverter/printHexBinary (.getMessage msg)))))
-      (swap! messages conj msg))))
+    (send [this data timestamp]
+      (let [msg (.getMessage data)]
+        (server/broadcast! 
+          (DatatypeConverter/printHexBinary msg))))))
           
 (defn reload! []
   (close!)
