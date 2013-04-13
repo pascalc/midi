@@ -6,12 +6,12 @@ The server listens on ws://localhost:8080
 
 and broadcast a stream of JSON:
 
-  {"raw":"903B61","tone":"B4","type":"noteOn"}
-  {"raw":"803E7F","tone":"D5","type":"noteOff"} 
+    {"raw":"903B61","tone":"B4","type":"noteOn"}
+    {"raw":"803E7F","tone":"D5","type":"noteOff"} 
 
 ## Usage
 
-  java -jar target/midi-0.1.0-SNAPSHOT-standalone.jar
+    java -jar target/midi-0.1.0-SNAPSHOT-standalone.jar
 
 ## License
 
