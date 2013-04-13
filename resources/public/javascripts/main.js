@@ -12,14 +12,15 @@ function onNoteDown(note) {
 
 	if (noteCode == expectedNoteCode) {
 		console.log('Good!');
-		drawNextLine();
+		draw();
 		if (gameIsFinished()) {
 			alert("Great job!");
 		}
+		currentDot = (currentDot + 1) % image.length;
 	}
 	else {
 		console.log("Wrong character `" + note + "`, next is: " + getNextNote());
 	}
 }
 
-drawDots();
+draw();
