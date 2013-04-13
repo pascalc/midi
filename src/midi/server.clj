@@ -26,6 +26,3 @@
 
 (defn stop-server! []
   (@server))
-
-(defn -main [& args]
-  (start-server!))
