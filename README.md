@@ -2,15 +2,13 @@
 
 A WebSocket server for external MIDI keyboards
 
-The server listens on ws://localhost:8080
-
-and broadcast a stream of JSON:
+The server listens on ws://localhost:8080 and broadcasts a stream of JSON:
 
     {"raw":"903B61","tone":"B4","type":"noteOn", "note": 50}
     {"raw":"803E7F","tone":"D5","type":"noteOff", "note": 61} 
 
 ## Usage
-
+    lein uberjar
     java -jar target/midi-0.1.0-SNAPSHOT-standalone.jar
 
 ## Example client
