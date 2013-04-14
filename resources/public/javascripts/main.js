@@ -17,7 +17,9 @@ function onNoteDown(note) {
 		console.log("currentDot", currentDot);
 		draw(currentDot);
 		if (gameIsFinished()) {
-			alert("Great job!");
+			// setTimeout(function () {
+			// 	alert("Great job!");	
+			// }, 3000);
 		}
 	}
 	else {

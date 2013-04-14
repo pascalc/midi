@@ -2,7 +2,7 @@ var c=document.getElementById("canvas");
 var ctx=c.getContext("2d");
 var image             = catImage,
 	defaultDotRadius  = 4,
-	bigDotRadius      = 10;
+	bigDotRadius      = 15;
 
 function clearCanvas() {
 	ctx.clearRect(0, 0, 600, 600);
@@ -43,8 +43,8 @@ function drawLine(fromIndex, toIndex) {
 	ctx.stroke();
 }
 
-function drawLines() {
-	for (var toIndex = 1; toIndex <= currentDot; toIndex++) {
+function drawLines(current) {
+	for (var toIndex = 1; toIndex <= current; toIndex++) {
 		fromIndex = toIndex - 1;
 		drawLine(fromIndex, toIndex);
 	}
@@ -53,5 +53,5 @@ function drawLines() {
 function draw(current) {
 	clearCanvas();
 	drawDots(current);
-	drawLines();
+	drawLines(current - 1);
 }
